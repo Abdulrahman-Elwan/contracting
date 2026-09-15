@@ -13,10 +13,10 @@ export default function ServicesInteractive() {
     const ActiveServiceIcon = activeService.icon;
 
     return (
-        <>
+        <section className="relative w-full overflow-hidden py-14 sm:py-16 lg:py-24">
             {/* =====================================================
-          BACKGROUND
-      ====================================================== */}
+                BACKGROUND GLOW
+            ====================================================== */}
 
             <motion.div
                 initial={{
@@ -24,7 +24,7 @@ export default function ServicesInteractive() {
                     x: 100,
                 }}
                 whileInView={{
-                    opacity: 0.12,
+                    opacity: 0.1,
                     x: 0,
                 }}
                 viewport={{
@@ -33,175 +33,73 @@ export default function ServicesInteractive() {
                 transition={{
                     duration: 1.2,
                 }}
-                className="pointer-events-none absolute -left-40 top-20 h-[500px] w-[500px] rounded-full bg-orange blur-3xl"
+                className="
+                    pointer-events-none
+                    absolute
+                    -left-40
+                    top-20
+                    h-[350px]
+                    w-[350px]
+                    rounded-full
+                    bg-orange
+                    blur-[100px]
+                    sm:h-[450px]
+                    sm:w-[450px]
+                    lg:h-[550px]
+                    lg:w-[550px]
+                "
             />
 
-            <div className="relative z-10 mx-auto max-w-[1350px] px-5 sm:px-8 lg:px-12">
-                <div className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.8fr] lg:gap-20">
+            {/* =====================================================
+                MAIN CONTAINER
+            ====================================================== */}
 
+            <div
+                className="
+                    relative
+                    z-10
+                    mx-auto
+                    w-full
+                    max-w-[1350px]
+                    px-4
+                    sm:px-6
+                    md:px-8
+                    lg:px-10
+                    xl:px-12
+                "
+            >
+                <div
+                    className="
+                        flex
+                        w-full
+                        flex-col
+                        gap-10
+                        lg:grid
+                        lg:grid-cols-[0.95fr_1.05fr]
+                        lg:items-start
+                        lg:gap-16
+                        xl:grid-cols-[0.9fr_1.1fr]
+                        xl:gap-20
+                    "
+                >
                     {/* =================================================
-              IMAGE / GALLERY
-          ================================================== */}
+                        SERVICES CONTENT
+                    ================================================== */}
 
-                    <motion.div
-                        initial={{
-                            opacity: 0,
-                            x: -80,
-                        }}
-                        whileInView={{
-                            opacity: 1,
-                            x: 0,
-                        }}
-                        viewport={{
-                            once: true,
-                            amount: 0.2,
-                        }}
-                        transition={{
-                            duration: 0.9,
-                            ease: [0.16, 1, 0.3, 1],
-                        }}
-                        className="order-2 lg:order-1"
+                    <div
+                        className="
+                            order-1
+                            min-w-0
+                            w-full
+                            lg:order-2
+                        "
                     >
-                        {/* Main Image */}
-
-                        <div className="relative overflow-hidden rounded-lg border border-white/20 bg-[#092536] p-1 shadow-[0_25px_70px_rgba(0,0,0,0.25)]">
-                            <div className="relative aspect-[4/3] overflow-hidden rounded-md sm:aspect-[1.25/0.85]">
-                                <AnimatePresence mode="wait">
-                                    <motion.div
-                                        key={activeService.id}
-                                        initial={{
-                                            opacity: 0,
-                                            scale: 1.05,
-                                        }}
-                                        animate={{
-                                            opacity: 1,
-                                            scale: 1,
-                                        }}
-                                        exit={{
-                                            opacity: 0,
-                                            scale: 0.98,
-                                        }}
-                                        transition={{
-                                            duration: 0.45,
-                                        }}
-                                        className="absolute inset-0"
-                                    >
-                                        <Image
-                                            src={activeService.image}
-                                            alt={activeService.title}
-                                            fill
-                                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 60vw"
-                                            className="object-cover"
-                                        />
-
-                                        <div className="absolute inset-0 bg-gradient-to-t from-[#061c2a]/90 via-transparent to-transparent" />
-                                    </motion.div>
-                                </AnimatePresence>
-
-                                {/* Active service info */}
-                                <motion.div
-                                    key={`info-${activeService.id}`}
-                                    initial={{
-                                        opacity: 0,
-                                        y: 20,
-                                    }}
-                                    animate={{
-                                        opacity: 1,
-                                        y: 0,
-                                    }}
-                                    transition={{
-                                        duration: 0.5,
-                                    }}
-                                    className="absolute bottom-3 right-3 left-3 sm:bottom-7 sm:right-7 sm:left-7"
-                                >
-                                    <div className="flex items-center gap-3 rounded-lg bg-[#061c2a]/80 px-3 py-3 backdrop-blur-md sm:px-5 sm:py-4">
-
-                                        <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-orange text-[#061c2a] sm:h-10 sm:w-10">
-                                            <ActiveServiceIcon className="h-4 w-4 sm:h-5 sm:w-5" />
-                                        </div>
-
-                                        <div className="min-w-0">
-                                            <h3 className="truncate text-[15px] font-black sm:text-[18px]">
-                                                {activeService.title}
-                                            </h3>
-
-                                            <p className="mt-1 line-clamp-2 text-[10px] leading-[1.7] text-white/65 sm:text-[11px] sm:leading-[1.8]">
-                                                {activeService.description}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            </div>
-                        </div>
-
-                        {/* =================================================
-                THUMBNAILS
-            ================================================== */}
-
-                        <div className="mt-4 flex gap-3 overflow-x-auto pb-2">
-                            {services.slice(0, 5).map((service, index) => {
-                                const isActive = activeService.id === service.id;
-
-                                return (
-                                    <motion.button
-                                        key={service.id}
-                                        type="button"
-                                        onClick={() => setActiveService(service)}
-                                        initial={{
-                                            opacity: 0,
-                                            y: 20,
-                                        }}
-                                        whileInView={{
-                                            opacity: 1,
-                                            y: 0,
-                                        }}
-                                        viewport={{
-                                            once: true,
-                                        }}
-                                        transition={{
-                                            delay: index * 0.08,
-                                            duration: 0.5,
-                                        }}
-                                        whileHover={{
-                                            y: -4,
-                                        }}
-                                        className={`relative h-[72px] w-[105px] shrink-0 overflow-hidden rounded-md border-2 transition-all duration-300 ${isActive
-                                            ? "border-orange shadow-[0_5px_20px_rgba(255,126,0,0.2)]"
-                                            : "border-white/10 opacity-60 hover:border-white/40 hover:opacity-100"
-                                            }`}
-                                    >
-                                        <Image
-                                            src={service.image}
-                                            alt={service.title}
-                                            fill
-                                            sizes="105px"
-                                            className="object-cover"
-                                        />
-
-                                        {isActive && (
-                                            <motion.div
-                                                layoutId="activeThumbnail"
-                                                className="absolute inset-0 border-2 border-orange"
-                                            />
-                                        )}
-                                    </motion.button>
-                                );
-                            })}
-                        </div>
-                    </motion.div>
-
-                    {/* =================================================
-              SERVICES LIST
-          ================================================== */}
-
-                    <div className="order-1 lg:order-2">
-
                         {/* Small title */}
 
                         <motion.div
                             initial={{
                                 opacity: 0,
-                                x: 50,
+                                x: 30,
                             }}
                             whileInView={{
                                 opacity: 1,
@@ -211,44 +109,42 @@ export default function ServicesInteractive() {
                                 once: true,
                             }}
                             transition={{
-                                duration: 0.7,
+                                duration: 0.6,
                             }}
-                            className="mb-3 flex items-center justify-end gap-3"
                             dir="ltr"
+                            className="
+                                mb-3
+                                flex
+                                items-center
+                                justify-end
+                                gap-2
+                                sm:gap-3
+                            "
                         >
-                            <span className="text-[13px] font-bold text-orange">
+                            <span
+                                className="
+                                    text-[12px]
+                                    font-bold
+                                    text-orange
+                                    sm:text-[13px]
+                                "
+                            >
                                 خدماتنا
                             </span>
 
-                            <span className="h-[2px] w-10 bg-orange" />
+                            <span
+                                className="
+                                    h-[2px]
+                                    w-7
+                                    bg-orange
+                                    sm:w-10
+                                "
+                            />
                         </motion.div>
 
                         {/* Heading */}
 
                         <motion.h2
-                            initial={{
-                                opacity: 0,
-                                y: 25,
-                            }}
-                            whileInView={{
-                                opacity: 1,
-                                y: 0,
-                            }}
-                            viewport={{
-                                once: true,
-                            }}
-                            transition={{
-                                duration: 0.7,
-                                delay: 0.1,
-                            }}
-                            className="text-[32px] font-black leading-[1.3] sm:text-[40px]"
-                        >
-                            كل ما تحتاجه
-                            <br />
-                            <span className="text-white">في مكان واحد</span>
-                        </motion.h2>
-
-                        <motion.p
                             initial={{
                                 opacity: 0,
                                 y: 20,
@@ -262,32 +158,91 @@ export default function ServicesInteractive() {
                             }}
                             transition={{
                                 duration: 0.7,
-                                delay: 0.2,
                             }}
-                            className="mt-5 max-w-[470px] text-[13px] leading-[2] text-white/55"
+                            className="
+                                text-right
+                                text-[28px]
+                                font-black
+                                leading-[1.35]
+                                sm:text-[34px]
+                                md:text-[38px]
+                                lg:text-[40px]
+                                xl:text-[44px]
+                            "
                         >
-                            نقدم خدمات متكاملة بجودة عالية وفريق متخصص يضع احتياجاته
-                            في مقدمة أولوياته، من أعمال الطرق والأسفلت إلى الخدمات
-                            المساندة والتشطيبات.
+                            كل ما تحتاجه
+                            <br />
+                            <span className="text-white">
+                                في مكان واحد
+                            </span>
+                        </motion.h2>
+
+                        {/* Description */}
+
+                        <motion.p
+                            initial={{
+                                opacity: 0,
+                                y: 15,
+                            }}
+                            whileInView={{
+                                opacity: 1,
+                                y: 0,
+                            }}
+                            viewport={{
+                                once: true,
+                            }}
+                            transition={{
+                                duration: 0.7,
+                                delay: 0.1,
+                            }}
+                            className="
+                                mt-4
+                                max-w-[560px]
+                                text-right
+                                text-[12px]
+                                leading-[2]
+                                text-white/55
+                                sm:mt-5
+                                sm:text-[13px]
+                                lg:max-w-[500px]
+                            "
+                        >
+                            نقدم خدمات متكاملة بجودة عالية وفريق متخصص يضع
+                            احتياجاته في مقدمة أولوياته، من أعمال الطرق
+                            والأسفلت إلى الخدمات المساندة والتشطيبات.
                         </motion.p>
 
                         {/* =================================================
-                SERVICES
-            ================================================== */}
+                            SERVICES LIST
+                        ================================================== */}
 
-                        <div className="mt-7 border-t border-white/10">
+                        <div
+                            className="
+                                mt-6
+                                w-full
+                                overflow-hidden
+                                rounded-lg
+                                border-t
+                                border-white/10
+                                sm:mt-8
+                            "
+                            dir="rtl"
+                        >
                             {services.map((service, index) => {
                                 const Icon = service.icon;
-                                const isActive = activeService.id === service.id;
+                                const isActive =
+                                    activeService.id === service.id;
 
                                 return (
                                     <motion.button
                                         key={service.id}
                                         type="button"
-                                        onClick={() => setActiveService(service)}
+                                        onClick={() =>
+                                            setActiveService(service)
+                                        }
                                         initial={{
                                             opacity: 0,
-                                            x: 35,
+                                            x: 25,
                                         }}
                                         whileInView={{
                                             opacity: 1,
@@ -298,51 +253,432 @@ export default function ServicesInteractive() {
                                             amount: 0.1,
                                         }}
                                         transition={{
-                                            duration: 0.45,
-                                            delay: 0.25 + index * 0.04,
+                                            duration: 0.4,
+                                            delay:
+                                                0.15 +
+                                                index * 0.035,
                                         }}
-                                        className={`px-3 group flex w-full items-center gap-4 border-b border-white/10 py-3 text-right transition-all duration-300 ${isActive
-                                            ? "bg-white/[0.03] text-orange"
-                                            : "text-white hover:bg-white/[0.025]"
-                                            }`}
-                                    >
-                                        {/* Arrow */}
+                                        className={`
+                                            group
+                                            flex
+                                            min-h-[54px]
+                                            w-full
+                                            items-center
+                                            gap-3
+                                            border-b
+                                            border-white/10
+                                            px-3
+                                            py-2.5
+                                            text-right
+                                            transition-all
+                                            duration-300
+                                            sm:min-h-[60px]
+                                            sm:px-4
+                                            sm:py-3
 
-                                        <ChevronLeft
-                                            className={`h-4 w-4 shrink-0 transition-all duration-300 ${isActive
-                                                ? "translate-x-0 opacity-100 text-orange"
-                                                : "-translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
-                                                }`}
-                                        />
+                                            ${
+                                                isActive
+                                                    ? "bg-white/[0.055]"
+                                                    : "hover:bg-white/[0.025]"
+                                            }
+                                        `}
+                                    >
+                                        {/* Icon */}
+
+                                        <span
+                                            className={`
+                                                grid
+                                                h-8
+                                                w-8
+                                                shrink-0
+                                                place-items-center
+                                                rounded-md
+                                                transition-all
+                                                duration-300
+                                                sm:h-9
+                                                sm:w-9
+                                                sm:rounded-lg
+
+                                                ${
+                                                    isActive
+                                                        ? "bg-orange text-[#061c2a]"
+                                                        : "bg-white/5 text-orange group-hover:bg-orange/10"
+                                                }
+                                            `}
+                                        >
+                                            <Icon className="h-4 w-4 sm:h-[17px] sm:w-[17px]" />
+                                        </span>
 
                                         {/* Title */}
 
                                         <span
-                                            className={`flex-1 text-[13px] font-bold transition-colors ${isActive
-                                                ? "text-orange"
-                                                : "text-white/80 group-hover:text-white"
-                                                }`}
+                                            className={`
+                                                min-w-0
+                                                flex-1
+                                                text-[12px]
+                                                font-bold
+                                                transition-colors
+                                                sm:text-[13px]
+                                                ${
+                                                    isActive
+                                                        ? "text-orange"
+                                                        : "text-white/80 group-hover:text-white"
+                                                }
+                                            `}
                                         >
                                             {service.title}
                                         </span>
 
-                                        {/* Icon */}
+                                        {/* Arrow */}
 
-                                        <span
-                                            className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg transition-all duration-300 ${isActive
-                                                ? "bg-orange text-[#061c2a]"
-                                                : "bg-white/5 text-orange group-hover:bg-orange/10"
-                                                }`}
-                                        >
-                                            <Icon className="h-4 w-4" />
-                                        </span>
+                                        <ChevronLeft
+                                            className={`
+                                                h-4
+                                                w-4
+                                                shrink-0
+                                                transition-all
+                                                duration-300
+
+                                                ${
+                                                    isActive
+                                                        ? "translate-x-0 opacity-100 text-orange"
+                                                        : "-translate-x-1 opacity-40 group-hover:translate-x-0 group-hover:opacity-100"
+                                                }
+                                            `}
+                                        />
                                     </motion.button>
                                 );
                             })}
                         </div>
                     </div>
+
+                    {/* =================================================
+                        IMAGE / GALLERY
+                    ================================================== */}
+
+                    <motion.div
+                        initial={{
+                            opacity: 0,
+                            x: -50,
+                        }}
+                        whileInView={{
+                            opacity: 1,
+                            x: 0,
+                        }}
+                        viewport={{
+                            once: true,
+                            amount: 0.15,
+                        }}
+                        transition={{
+                            duration: 0.8,
+                            ease: [0.16, 1, 0.3, 1],
+                        }}
+                        className="
+                            order-2
+                            min-w-0
+                            w-full
+                            lg:order-1
+                        "
+                    >
+                        {/* Main Gallery */}
+
+                        <div
+                            className="
+                                w-full
+                                overflow-hidden
+                                rounded-xl
+                                border
+                                border-white/15
+                                bg-[#092536]
+                                p-1
+                                shadow-[0_20px_60px_rgba(0,0,0,0.25)]
+                                sm:rounded-2xl
+                                sm:p-1.5
+                            "
+                        >
+                            <div
+                                className="
+                                    relative
+                                    aspect-[4/3]
+                                    w-full
+                                    overflow-hidden
+                                    rounded-lg
+                                    sm:aspect-[16/10]
+                                    lg:aspect-[4/3]
+                                    xl:aspect-[16/10]
+                                "
+                            >
+                                <AnimatePresence mode="wait">
+                                    <motion.div
+                                        key={activeService.id}
+                                        initial={{
+                                            opacity: 0,
+                                            scale: 1.03,
+                                        }}
+                                        animate={{
+                                            opacity: 1,
+                                            scale: 1,
+                                        }}
+                                        exit={{
+                                            opacity: 0,
+                                            scale: 0.99,
+                                        }}
+                                        transition={{
+                                            duration: 0.4,
+                                        }}
+                                        className="absolute inset-0"
+                                    >
+                                        <Image
+                                            src={activeService.image}
+                                            alt={activeService.title}
+                                            fill
+                                            priority
+                                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 55vw"
+                                            className="
+                                                object-cover
+                                                object-center
+                                            "
+                                        />
+
+                                        {/* Gradient */}
+
+                                        <div
+                                            className="
+                                                absolute
+                                                inset-0
+                                                bg-gradient-to-t
+                                                from-[#061c2a]
+                                                via-[#061c2a]/10
+                                                to-transparent
+                                            "
+                                        />
+                                    </motion.div>
+                                </AnimatePresence>
+
+                                {/* =================================================
+                                    SERVICE INFO
+                                ================================================== */}
+
+                                <motion.div
+                                    key={`info-${activeService.id}`}
+                                    initial={{
+                                        opacity: 0,
+                                        y: 15,
+                                    }}
+                                    animate={{
+                                        opacity: 1,
+                                        y: 0,
+                                    }}
+                                    transition={{
+                                        duration: 0.45,
+                                    }}
+                                    className="
+                                        absolute
+                                        bottom-2
+                                        left-2
+                                        right-2
+                                        sm:bottom-4
+                                        sm:left-4
+                                        sm:right-4
+                                        lg:bottom-5
+                                        lg:left-5
+                                        lg:right-5
+                                    "
+                                >
+                                    <div
+                                        className="
+                                            flex
+                                            items-center
+                                            gap-2.5
+                                            rounded-lg
+                                            border
+                                            border-white/10
+                                            bg-[#061c2a]/80
+                                            px-2.5
+                                            py-2.5
+                                            backdrop-blur-md
+                                            sm:gap-3
+                                            sm:px-4
+                                            sm:py-3
+                                            lg:px-5
+                                            lg:py-4
+                                        "
+                                        dir="rtl"
+                                    >
+                                        {/* Icon */}
+
+                                        <div
+                                            className="
+                                                grid
+                                                h-8
+                                                w-8
+                                                shrink-0
+                                                place-items-center
+                                                rounded-full
+                                                bg-orange
+                                                text-[#061c2a]
+                                                sm:h-10
+                                                sm:w-10
+                                            "
+                                        >
+                                            <ActiveServiceIcon
+                                                className="
+                                                    h-4
+                                                    w-4
+                                                    sm:h-5
+                                                    sm:w-5
+                                                "
+                                            />
+                                        </div>
+
+                                        {/* Text */}
+
+                                        <div className="min-w-0 flex-1">
+                                            <h3
+                                                className="
+                                                    truncate
+                                                    text-[12px]
+                                                    font-black
+                                                    sm:text-[15px]
+                                                    lg:text-[17px]
+                                                "
+                                            >
+                                                {activeService.title}
+                                            </h3>
+
+                                            <p
+                                                className="
+                                                    mt-0.5
+                                                    line-clamp-1
+                                                    text-[9px]
+                                                    leading-[1.7]
+                                                    text-white/60
+                                                    sm:mt-1
+                                                    sm:line-clamp-2
+                                                    sm:text-[10px]
+                                                    lg:text-[11px]
+                                                "
+                                            >
+                                                {
+                                                    activeService.description
+                                                }
+                                            </p>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            </div>
+                        </div>
+
+                        {/* =================================================
+                            THUMBNAILS
+                        ================================================== */}
+
+                        <div
+                            className="
+                                mt-3
+                                flex
+                                w-full
+                                gap-2
+                                overflow-x-auto
+                                pb-1
+                                sm:mt-4
+                                sm:gap-3
+                                sm:pb-2
+                            "
+                            style={{
+                                scrollbarWidth: "none",
+                            }}
+                        >
+                            {services
+                                .slice(0, 5)
+                                .map((service, index) => {
+                                    const isActive =
+                                        activeService.id ===
+                                        service.id;
+
+                                    return (
+                                        <motion.button
+                                            key={service.id}
+                                            type="button"
+                                            onClick={() =>
+                                                setActiveService(
+                                                    service
+                                                )
+                                            }
+                                            initial={{
+                                                opacity: 0,
+                                                y: 15,
+                                            }}
+                                            whileInView={{
+                                                opacity: 1,
+                                                y: 0,
+                                            }}
+                                            viewport={{
+                                                once: true,
+                                            }}
+                                            transition={{
+                                                delay:
+                                                    index *
+                                                    0.06,
+                                                duration: 0.4,
+                                            }}
+                                            whileHover={{
+                                                y: -3,
+                                            }}
+                                            className={`
+                                                relative
+                                                h-[58px]
+                                                w-[82px]
+                                                shrink-0
+                                                overflow-hidden
+                                                rounded-md
+                                                border
+                                                transition-all
+                                                duration-300
+
+                                                sm:h-[70px]
+                                                sm:w-[100px]
+                                                sm:rounded-lg
+                                                sm:border-2
+
+                                                ${
+                                                    isActive
+                                                        ? "border-orange opacity-100 shadow-[0_5px_20px_rgba(255,126,0,0.2)]"
+                                                        : "border-white/10 opacity-60 hover:border-white/30 hover:opacity-100"
+                                                }
+                                            `}
+                                        >
+                                            <Image
+                                                src={
+                                                    service.image
+                                                }
+                                                alt={
+                                                    service.title
+                                                }
+                                                fill
+                                                sizes="100px"
+                                                className="object-cover"
+                                            />
+
+                                            {/* Active overlay */}
+
+                                            {isActive && (
+                                                <div
+                                                    className="
+                                                        absolute
+                                                        inset-0
+                                                        border-2
+                                                        border-orange
+                                                    "
+                                                />
+                                            )}
+                                        </motion.button>
+                                    );
+                                })}
+                        </div>
+                    </motion.div>
                 </div>
             </div>
-        </>
+        </section>
     );
 }
