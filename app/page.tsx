@@ -2,14 +2,13 @@ import type { Metadata } from "next";
 
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import ProblemSolution from "@/components/ProblemSolution";
-import Services from "@/components/Services";
 import WhyUs from "@/components/WhyUs";
 import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import FloatingActions from "@/components/FloatingActions";
-import Gallery from "@/components/Gallery";
+import ServicesShowcase from "@/components/ServicesShowcase";
+import SolutionsSection from "@/components/SolutionsSection";
 
 export const metadata: Metadata = {
   title: "خدمات تسليك وتنظيف الصرف الصحي في السعودية | ثقتكم هدفنا",
@@ -78,13 +77,52 @@ export default function Home() {
       <Navbar />
 
       <main id="main">
-        <Hero />
-        <ProblemSolution />
-        <Services />
-        <Gallery />
-        <WhyUs />
-        <Testimonials />
-        <Contact />
+
+        {/* الرئيسية */}
+        <section id="home" className="scroll-mt-[80px]">
+          <Hero />
+        </section>
+
+        {/* خدماتنا */}
+        <section
+          id="services"
+          className="scroll-mt-[80px]"
+        >
+          <ServicesShowcase />
+        </section>
+
+        {/* حلولنا */}
+        <section
+          id="solutions"
+          className="scroll-mt-[80px]"
+        >
+          <SolutionsSection />
+        </section>
+
+        {/* لماذا نحن */}
+        <section
+          id="why-us"
+          className="scroll-mt-[80px]"
+        >
+          <WhyUs />
+        </section>
+
+        {/* آراء العملاء */}
+        <section
+          id="testimonials"
+          className="scroll-mt-[80px]"
+        >
+          <Testimonials />
+        </section>
+
+        {/* تواصل معنا */}
+        <section
+          id="contact"
+          className="scroll-mt-[80px]"
+        >
+          <Contact />
+        </section>
+
       </main>
 
       <Footer />

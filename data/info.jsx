@@ -1,2 +1,2 @@
-export const number = '966578342054'
-export const locatiom = 'جميع احياء الرياض - الخرج'
+export const number = '966556689704'
+export const locatiom = 'الدمام'

@@ -1,173 +1,441 @@
 "use client";
 
-import { useState, FormEvent } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
-import { Phone, MessageCircle, Mail, MapPin, Send, CheckCircle2, AlertCircle } from "lucide-react";
-import { fadeUp, staggerContainer, viewportOnce } from "@/lib/animations";
+import {
+  Phone,
+  MessageCircle,
+  MapPin,
+  Clock3,
+  ArrowLeft,
+} from "lucide-react";
+
 import { locatiom, number } from "@/data/info";
 
-type FormState = {
-  name: string;
-  phone: string;
-  serviceType: string;
-  city: string;
-  message: string;
-};
-
-const initialForm: FormState = {
-  name: "",
-  phone: "",
-  serviceType: "",
-  city: "",
-  message: "",
-};
-
-const serviceOptions = [
-  "تسليك خطوط الصرف",
-  "تنظيف شبكات الصرف",
-  "إزالة الروائح الكريهة",
-  "شفط الدهون والرواسب",
-  "شفط البيارات",
-  "تنظيف بيارات المنازل",
-  "عقود الشركات والمصانع والمطاعم",
-];
-
 export default function Contact() {
-  const [form, setForm] = useState<FormState>(initialForm);
-  const [errors, setErrors] = useState<Partial<FormState>>({});
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
-
-  function validate(): boolean {
-    const next: Partial<FormState> = {};
-    if (!form.name.trim()) next.name = "الرجاء إدخال الاسم";
-    if (!/^0?5\d{8}$/.test(form.phone.replace(/\s|-/g, "")))
-      next.phone = "رقم جوال سعودي غير صحيح";
-    if (!form.serviceType) next.serviceType = "الرجاء اختيار نوع الخدمة";
-    if (!form.city.trim()) next.city = "الرجاء إدخال المدينة";
-    setErrors(next);
-    return Object.keys(next).length === 0;
-  }
-
-  function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-    if (!validate()) {
-      setStatus("error");
-      return;
-    }
-    // NOTE: no backend endpoint exists yet — wire this up to your API/CRM.
-    setStatus("success");
-    setForm(initialForm);
-  }
-
   return (
-    <section id="contact" className="relative overflow-hidden py-20 lg:py-28">
-      <Image
-        src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=1800&auto=format&fit=crop"
-        alt="سيارة شفط صرف صحي أثناء العمل"
-        fill
-        sizes="100vw"
-        className="object-cover"
-      />
-      <div className="absolute inset-0 bg-navy/90" />
+    <section
+      id="contact"
+      dir="rtl"
+      className="relative overflow-hidden bg-white py-20 sm:py-24 lg:py-28"
+    >
+      {/* =====================================================
+          BACKGROUND
+      ====================================================== */}
 
-      <div className="relative mx-auto max-w-6xl px-5 lg:px-8">
+      <div className="pointer-events-none absolute -left-40 top-20 h-[450px] w-[450px] rounded-full bg-orange/[0.035] blur-3xl" />
+
+      <div className="pointer-events-none absolute -right-40 bottom-0 h-[450px] w-[450px] rounded-full bg-[#061c2a]/[0.04] blur-3xl" />
+
+      {/* =====================================================
+          CONTAINER
+      ====================================================== */}
+
+      <div className="relative z-10 mx-auto max-w-[1250px] px-5 sm:px-8 lg:px-12">
+
+        {/* ===================================================
+            HEADER
+        ==================================================== */}
+
         <motion.div
-          initial="hidden"
-          whileInView="show"
-          viewport={viewportOnce}
-          variants={staggerContainer(0.15)}
-          className="grid grid-cols-1 gap-6 lg:grid-cols-5"
+          initial={{
+            opacity: 0,
+            y: 30,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          viewport={{
+            once: true,
+            amount: 0.3,
+          }}
+          transition={{
+            duration: 0.7,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+          className="mb-12 grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end"
         >
-          {/* Info card */}
-          <motion.div
-            variants={fadeUp}
-            className="rounded-4xl bg-white p-8 shadow-soft lg:col-span-2"
-          >
-            <h3 className="text-2xl font-extrabold text-navy">تواصل معنا</h3>
-            <p className="mt-2 text-muted">
-              نحن هنا لخدمتك على مدار الساعة
-            </p>
+          {/* Heading */}
 
-            <ul className="mt-8 flex flex-col gap-5">
-              <li className="flex items-center gap-3">
-                <span className="grid h-11 w-11 place-items-center rounded-full bg-green-light text-green">
+          <div>
+            <div className="flex items-center gap-3">
+              <span className="h-[2px] w-10 rounded-full bg-orange" />
+
+              <span className="text-sm font-extrabold text-orange">
+                تواصل معنا
+              </span>
+            </div>
+
+            <h2 className="mt-5 text-[32px] font-black leading-[1.3] tracking-tight text-[#061c2a] sm:text-[42px] lg:text-[48px]">
+              جاهزين نخدمك
+              <br />
+
+              <span className="text-orange">
+                في أي وقت
+              </span>
+            </h2>
+          </div>
+
+          {/* Description */}
+
+          <div className="max-w-[450px] lg:pb-1">
+            <p className="text-sm leading-[2] text-slate-500 sm:text-[15px]">
+              عندك مشكلة أو تحتاج إلى خدمة؟ تواصل معنا وسنساعدك
+              في اختيار الحل المناسب وتنفيذ الخدمة باحترافية
+              وسرعة.
+            </p>
+          </div>
+        </motion.div>
+
+        {/* ===================================================
+            CONTACT LAYOUT
+        ==================================================== */}
+
+        <div className="grid overflow-hidden border-y border-slate-200 lg:grid-cols-[0.85fr_1.15fr]">
+
+          {/* =================================================
+              CONTACT INFO
+          ================================================== */}
+
+          <motion.div
+            initial={{
+              opacity: 0,
+              x: 50,
+            }}
+            whileInView={{
+              opacity: 1,
+              x: 0,
+            }}
+            viewport={{
+              once: true,
+              amount: 0.15,
+            }}
+            transition={{
+              duration: 0.75,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            className="
+              relative
+              flex
+              flex-col
+              justify-between
+              bg-[#061c2a]
+              px-7
+              py-10
+              sm:px-10
+              sm:py-12
+              lg:px-12
+              lg:py-14
+            "
+          >
+            {/* Glow */}
+
+            <div className="pointer-events-none absolute -left-24 -top-24 h-64 w-64 rounded-full bg-orange/10 blur-3xl" />
+
+            {/* =================================================
+                INTRO
+            ================================================== */}
+
+            <div className="relative">
+
+              <span className="text-xs font-bold text-orange">
+                خدمة سريعة وموثوقة
+              </span>
+
+              <h3 className="mt-4 text-[27px] font-black leading-[1.45] text-white sm:text-[32px]">
+                كل ما تحتاجه
+                <br />
+
+                <span className="text-orange">
+                  في مكان واحد
+                </span>
+              </h3>
+
+              <p className="mt-4 max-w-[390px] text-sm leading-[2] text-white/50">
+                فريق متخصص جاهز لاستقبال طلباتكم وتنفيذ خدمات
+                الصرف الصحي بسرعة وكفاءة، للمنازل والمنشآت.
+              </p>
+            </div>
+
+            {/* =================================================
+                CONTACT ITEMS
+            ================================================== */}
+
+            <div className="relative mt-10 space-y-2">
+
+              {/* Phone */}
+
+              <a
+                href={`tel:+${number}`}
+                className="
+                  group
+                  flex
+                  items-center
+                  gap-4
+                  border-b
+                  border-white/10
+                  py-5
+                  transition-all
+                  duration-300
+                  hover:pr-2
+                "
+              >
+                <span
+                  className="
+                    flex
+                    h-11
+                    w-11
+                    shrink-0
+                    items-center
+                    justify-center
+                    rounded-xl
+                    bg-orange/10
+                    text-orange
+                    transition-all
+                    duration-300
+                    group-hover:bg-orange
+                    group-hover:text-[#061c2a]
+                  "
+                >
                   <Phone className="h-5 w-5" />
                 </span>
-                <a href={`tel:+${number}`} dir="ltr" className="focus-ring rounded text-navy/90 hover:text-green">
-                  +{number}
-                </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="grid h-11 w-11 place-items-center rounded-full bg-green-light text-green">
+
+                <span className="min-w-0">
+                  <span className="block text-[11px] text-white/35">
+                    اتصل بنا
+                  </span>
+
+                  <span
+                    dir="ltr"
+                    className="mt-1 block text-sm font-bold text-white"
+                  >
+                    +{number}
+                  </span>
+                </span>
+
+                <ArrowLeft
+                  className="
+                    mr-auto
+                    h-4
+                    w-4
+                    text-orange
+                    opacity-0
+                    -translate-x-2
+                    transition-all
+                    duration-300
+                    group-hover:translate-x-0
+                    group-hover:opacity-100
+                  "
+                />
+              </a>
+
+              {/* WhatsApp */}
+
+              <a
+                href={`https://wa.me/${number}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="
+                  group
+                  flex
+                  items-center
+                  gap-4
+                  border-b
+                  border-white/10
+                  py-5
+                  transition-all
+                  duration-300
+                  hover:pr-2
+                "
+              >
+                <span
+                  className="
+                    flex
+                    h-11
+                    w-11
+                    shrink-0
+                    items-center
+                    justify-center
+                    rounded-xl
+                    bg-orange/10
+                    text-orange
+                    transition-all
+                    duration-300
+                    group-hover:bg-orange
+                    group-hover:text-[#061c2a]
+                  "
+                >
                   <MessageCircle className="h-5 w-5" />
                 </span>
-                <a
-                  href={`https://wa.me/${number}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  dir="ltr"
-                  className="focus-ring rounded text-navy/90 hover:text-green"
+
+                <span>
+                  <span className="block text-[11px] text-white/35">
+                    واتساب
+                  </span>
+
+                  <span
+                    dir="ltr"
+                    className="mt-1 block text-sm font-bold text-white"
+                  >
+                    +{number}
+                  </span>
+                </span>
+
+                <ArrowLeft
+                  className="
+                    mr-auto
+                    h-4
+                    w-4
+                    text-orange
+                    opacity-0
+                    -translate-x-2
+                    transition-all
+                    duration-300
+                    group-hover:translate-x-0
+                    group-hover:opacity-100
+                  "
+                />
+              </a>
+
+              {/* Location */}
+
+              <div className="flex items-center gap-4 border-b border-white/10 py-5">
+                <span
+                  className="
+                    flex
+                    h-11
+                    w-11
+                    shrink-0
+                    items-center
+                    justify-center
+                    rounded-xl
+                    bg-orange/10
+                    text-orange
+                  "
                 >
-                  +{number}
-                </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <span className="grid h-11 w-11 place-items-center rounded-full bg-green-light text-green">
                   <MapPin className="h-5 w-5" />
                 </span>
-                <span className="text-navy/90">{locatiom}</span>
-              </li>
-            </ul>
-          </motion.div>
 
-          {/* Google Maps card */}
-          <motion.div
-            variants={fadeUp}
-            className="overflow-hidden rounded-4xl bg-white shadow-soft lg:col-span-3"
-          >
+                <span>
+                  <span className="block text-[11px] text-white/35">
+                    موقعنا
+                  </span>
 
-            <div className="px-4 py-4 sm:px-6 sm:pb-6">
-              <div className="relative h-[350px] w-full overflow-hidden rounded-3xl sm:h-[400px]">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58017.90162013669!2d46.856456!3d24.65403705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e2fa80938a44ddf%3A0xc6df1d7882486c4a!2z2KfZhNiz2YTZitiMINin2YTYsdmK2KfYtiDYp9mE2LPYudmI2K_Zitip!5e0!3m2!1sar!2seg!4v1788882541891!5m2!1sar!2seg"
-                  title="موقعنا على الخريطة"
-                  className="h-full w-full border-0"
-                  loading="lazy"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                />
+                  <span className="mt-1 block text-sm font-bold text-white">
+                    {locatiom}
+                  </span>
+                </span>
               </div>
+
+              {/* Working hours */}
+
+              <div className="flex items-center gap-4 py-5">
+                <span
+                  className="
+                    flex
+                    h-11
+                    w-11
+                    shrink-0
+                    items-center
+                    justify-center
+                    rounded-xl
+                    bg-orange/10
+                    text-orange
+                  "
+                >
+                  <Clock3 className="h-5 w-5" />
+                </span>
+
+                <span>
+                  <span className="block text-[11px] text-white/35">
+                    مواعيد الخدمة
+                  </span>
+
+                  <span className="mt-1 block text-sm font-bold text-white">
+                    متاحون 24 ساعة
+                  </span>
+                </span>
+              </div>
+            </div>
+
+            {/* Bottom */}
+
+            <div className="relative mt-8 border-t border-white/10 pt-5">
+              <span className="text-[11px] font-bold text-white/30">
+                ثقتكم هدفنا — وخدمتكم مسؤوليتنا
+              </span>
             </div>
           </motion.div>
 
-        </motion.div>
+          {/* =================================================
+              MAP
+          ================================================== */}
+
+          <motion.div
+            initial={{
+              opacity: 0,
+              x: -50,
+            }}
+            whileInView={{
+              opacity: 1,
+              x: 0,
+            }}
+            viewport={{
+              once: true,
+              amount: 0.15,
+            }}
+            transition={{
+              duration: 0.75,
+              delay: 0.1,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            className="
+              relative
+              min-h-[420px]
+              bg-slate-200
+              lg:min-h-[650px]
+            "
+          >
+            {/* MAP */}
+
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d257365.1429930704!2d50.09939599759621!3d26.368443196482623!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e361d32276b3403%3A0xefd901ec7a5e5676!2z2KfZhNiv2YXYp9mFINin2YTYs9i52YjYr9mK2Kk!5e0!3m2!1sar!2seg!4v1789451910092!5m2!1sar!2seg"
+              title="موقعنا على الخريطة"
+              className="absolute inset-0 h-full w-full border-0"
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+
+            {/* MAP LABEL */}
+
+            <div
+              className="
+                pointer-events-none
+                absolute
+                right-5
+                top-5
+                flex
+                items-center
+                gap-2
+                rounded-xl
+                bg-[#061c2a]/90
+                px-4
+                py-3
+                text-xs
+                font-bold
+                text-white
+                shadow-lg
+                backdrop-blur-md
+              "
+            >
+              <MapPin className="h-4 w-4 text-orange" />
+
+              موقعنا على الخريطة
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
-  );
-}
-
-function inputClass(hasError: boolean) {
-  return `focus-ring w-full rounded-xl border bg-navy-50 px-4 py-3 text-[15px] text-navy outline-none transition-colors ${hasError ? "border-orange" : "border-transparent focus:border-green"
-    }`;
-}
-
-function Field({
-  label,
-  error,
-  className = "",
-  children,
-}: {
-  label: string;
-  error?: string;
-  className?: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <label className={`flex flex-col gap-1.5 text-sm font-medium text-navy/80 ${className}`}>
-      {label}
-      {children}
-      {error && <span className="text-xs font-semibold text-orange">{error}</span>}
-    </label>
   );
 }

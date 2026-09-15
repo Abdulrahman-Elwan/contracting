@@ -1,88 +1,81 @@
-'use client'
+"use client";
+
+import Image from "next/image";
+import imageLogo from "../assets/logo.png";
 
 export default function Loading() {
     return (
         <div
             dir="rtl"
-            className="fixed inset-0 z-[9999] flex items-center justify-center bg-white"
+            className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden bg-[#061c2a]"
         >
-            <div className="flex flex-col items-center">
+            {/* Background glow */}
+            <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute left-1/2 top-1/2 h-[420px] w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-orange/10 blur-[100px]" />
 
-                {/* Brand Mark */}
-                <div className="relative flex h-20 w-20 items-center justify-center">
-                    {/* Outer Ring */}
-                    <div className="absolute inset-0 rounded-full border border-slate-200" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,126,0,0.06),transparent_55%)]" />
+            </div>
 
-                    {/* Animated Ring */}
-                    <div className="absolute inset-1 animate-spin rounded-full border-2 border-transparent border-t-orange-500" />
+            <div className="relative z-10 flex flex-col items-center">
 
-                    {/* Water Drop */}
-                    <div className="relative flex h-12 w-12 items-center justify-center">
-                        <svg
-                            viewBox="0 0 48 48"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-12 w-12 text-orange-500"
-                            aria-hidden="true"
-                        >
-                            <path
-                                d="M24 4C24 4 11 18.2 11 27.8C11 35.2 16.8 41 24 41C31.2 41 37 35.2 37 27.8C37 18.2 24 4 24 4Z"
-                                fill="currentColor"
-                                fillOpacity="0.12"
-                            />
-
-                            <path
-                                d="M24 4C24 4 11 18.2 11 27.8C11 35.2 16.8 41 24 41C31.2 41 37 35.2 37 27.8C37 18.2 24 4 24 4Z"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinejoin="round"
-                            />
-
-                            <path
-                                d="M17 29C19.5 26.5 22 32 24.5 29.5C27 27 29.5 32.5 32 29.5"
-                                stroke="currentColor"
-                                strokeWidth="1.8"
-                                strokeLinecap="round"
-                            />
-                        </svg>
+                {/* =========================
+            LOGO
+        ========================== */}
+                <div className="relative flex h-[110px] w-[190px] items-center justify-center">
+                    {/* Logo */}
+                    <div className="relative flex items-center justify-center">
+                        <Image
+                            src={imageLogo}
+                            alt="ثقتكم هدفنا"
+                            width={180}
+                            height={70}
+                            priority
+                            className="h-auto w-[150px] object-contain"
+                        />
                     </div>
                 </div>
 
-                {/* Brand */}
+                {/* =========================
+            BRAND TEXT
+        ========================== */}
                 <div className="mt-5 text-center">
-                    <h1 className="text-base font-extrabold tracking-tight text-slate-800">
+
+                    <h1 className="text-lg font-black tracking-tight text-white">
                         ثقتكم هدفنا
                     </h1>
 
-                    <p className="mt-1 text-xs text-slate-400">
-                        حلول الصرف الصحي باحترافية
+                    <p className="mt-1 text-xs font-medium text-white/50">
+                        خدمات الصرف الصحي باحترافية
                     </p>
+
                 </div>
 
-                {/* Progress */}
-                <div
-                    className="mt-5 h-1 w-32 overflow-hidden rounded-full bg-slate-100"
-                    aria-hidden="true"
-                >
-                    <div className="h-full w-1/2 animate-[loading_1.4s_ease-in-out_infinite] rounded-full bg-orange-500" />
+                {/* =========================
+            LOADING
+        ========================== */}
+                <div className="mt-7 flex flex-col items-center">
+
+                    <div
+                        className="relative h-[3px] w-36 overflow-hidden rounded-full bg-white/10"
+                        aria-hidden="true"
+                    >
+                        <div className="absolute inset-y-0 right-0 w-1/2 animate-[loading_1.3s_ease-in-out_infinite] rounded-full bg-orange" />
+                    </div>
+
+                    <div className="mt-3 flex items-center gap-2">
+                        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-orange" />
+                        <span className="text-[10px] font-bold tracking-wide text-white/40">
+                            جاري التحميل
+                        </span>
+                    </div>
+
                 </div>
             </div>
 
-            <style jsx>{`
-        @keyframes loading {
-          0% {
-            transform: translateX(200%);
-          }
-
-          50% {
-            transform: translateX(0%);
-          }
-
-          100% {
-            transform: translateX(-200%);
-          }
-        }
-      `}</style>
+            {/* =========================
+          BOTTOM DECORATION
+      ========================== */}
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-l from-transparent via-orange/40 to-transparent" />
         </div>
     );
 }
