@@ -52,7 +52,7 @@ export default function Footer() {
             >
               <Image
                 src={logo}
-                alt="تسليك مجاري الصرف الصحي"
+                alt="مقاولات عامة"
                 width={400}
                 height={200}
                 className="h-auto w-[150px] object-contain"
@@ -60,9 +60,9 @@ export default function Footer() {
             </Link>
 
             <p className="mt-5 max-w-[420px] text-sm leading-[2] text-white/45">
-              نقدم حلولًا متخصصة وموثوقة في مجال خدمات الصرف الصحي،
-              مع الاعتماد على فريق متخصص ومعدات مناسبة لضمان سرعة
-              التنفيذ وجودة الخدمة.
+              نقدم خدمات متكاملة في المقاولات العامة وأعمال الطرق والأسفلت وتجهيز
+              المواقع، من خلال فريق متخصص وإمكانيات مناسبة لتنفيذ المشروعات بكفاءة
+              ودقة، مع الالتزام بالجودة ومتطلبات كل مشروع.
             </p>
 
             {/* CTA */}
@@ -172,24 +172,6 @@ export default function Footer() {
           <p className="text-center text-xs text-white/30 sm:text-right">
             © {new Date().getFullYear()} ثقتكم هدفنا. جميع الحقوق محفوظة.
           </p>
-
-          {/* Back to top */}
-
-          <button
-            type="button"
-            onClick={() =>
-              window.scrollTo({
-                top: 0,
-                behavior: "smooth",
-              })
-            }
-            aria-label="العودة إلى الأعلى"
-            className="group mx-auto flex items-center gap-2 rounded-full border border-white/10 px-4 py-2 text-xs font-bold text-white/40 transition-all duration-300 hover:border-orange/40 hover:text-orange sm:mx-0"
-          >
-            العودة للأعلى
-
-            <ArrowUp className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-1" />
-          </button>
         </div>
       </div>
     </footer>

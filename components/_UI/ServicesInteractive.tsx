@@ -65,7 +65,7 @@ export default function ServicesInteractive() {
                         {/* Main Image */}
 
                         <div className="relative overflow-hidden rounded-lg border border-white/20 bg-[#092536] p-1 shadow-[0_25px_70px_rgba(0,0,0,0.25)]">
-                            <div className="relative aspect-[1.25/0.85] overflow-hidden rounded-md">
+                            <div className="relative aspect-[4/3] overflow-hidden rounded-md sm:aspect-[1.25/0.85]">
                                 <AnimatePresence mode="wait">
                                     <motion.div
                                         key={activeService.id}
@@ -90,7 +90,7 @@ export default function ServicesInteractive() {
                                             src={activeService.image}
                                             alt={activeService.title}
                                             fill
-                                            sizes="(max-width: 1024px) 100vw, 60vw"
+                                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 60vw"
                                             className="object-cover"
                                         />
 
@@ -99,7 +99,6 @@ export default function ServicesInteractive() {
                                 </AnimatePresence>
 
                                 {/* Active service info */}
-
                                 <motion.div
                                     key={`info-${activeService.id}`}
                                     initial={{
@@ -113,19 +112,20 @@ export default function ServicesInteractive() {
                                     transition={{
                                         duration: 0.5,
                                     }}
-                                    className="absolute bottom-5 right-5 left-5 sm:bottom-7 sm:right-7 sm:left-7"
+                                    className="absolute bottom-3 right-3 left-3 sm:bottom-7 sm:right-7 sm:left-7"
                                 >
-                                    <div className="inline-flex items-center gap-3 rounded-lg bg-[#061c2a]/80 px-5 py-4 backdrop-blur-md">
-                                        <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-orange text-[#061c2a]">
-                                            <ActiveServiceIcon className="h-5 w-5" />
+                                    <div className="flex items-center gap-3 rounded-lg bg-[#061c2a]/80 px-3 py-3 backdrop-blur-md sm:px-5 sm:py-4">
+
+                                        <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-orange text-[#061c2a] sm:h-10 sm:w-10">
+                                            <ActiveServiceIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                                         </div>
 
-                                        <div>
-                                            <h3 className="text-[18px] font-black">
+                                        <div className="min-w-0">
+                                            <h3 className="truncate text-[15px] font-black sm:text-[18px]">
                                                 {activeService.title}
                                             </h3>
 
-                                            <p className="mt-1 max-w-[330px] text-[11px] leading-[1.8] text-white/65">
+                                            <p className="mt-1 line-clamp-2 text-[10px] leading-[1.7] text-white/65 sm:text-[11px] sm:leading-[1.8]">
                                                 {activeService.description}
                                             </p>
                                         </div>
@@ -166,8 +166,8 @@ export default function ServicesInteractive() {
                                             y: -4,
                                         }}
                                         className={`relative h-[72px] w-[105px] shrink-0 overflow-hidden rounded-md border-2 transition-all duration-300 ${isActive
-                                                ? "border-orange shadow-[0_5px_20px_rgba(255,126,0,0.2)]"
-                                                : "border-white/10 opacity-60 hover:border-white/40 hover:opacity-100"
+                                            ? "border-orange shadow-[0_5px_20px_rgba(255,126,0,0.2)]"
+                                            : "border-white/10 opacity-60 hover:border-white/40 hover:opacity-100"
                                             }`}
                                     >
                                         <Image
@@ -302,16 +302,16 @@ export default function ServicesInteractive() {
                                             delay: 0.25 + index * 0.04,
                                         }}
                                         className={`px-3 group flex w-full items-center gap-4 border-b border-white/10 py-3 text-right transition-all duration-300 ${isActive
-                                                ? "bg-white/[0.03] text-orange"
-                                                : "text-white hover:bg-white/[0.025]"
+                                            ? "bg-white/[0.03] text-orange"
+                                            : "text-white hover:bg-white/[0.025]"
                                             }`}
                                     >
                                         {/* Arrow */}
 
                                         <ChevronLeft
                                             className={`h-4 w-4 shrink-0 transition-all duration-300 ${isActive
-                                                    ? "translate-x-0 opacity-100 text-orange"
-                                                    : "-translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
+                                                ? "translate-x-0 opacity-100 text-orange"
+                                                : "-translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100"
                                                 }`}
                                         />
 
@@ -319,8 +319,8 @@ export default function ServicesInteractive() {
 
                                         <span
                                             className={`flex-1 text-[13px] font-bold transition-colors ${isActive
-                                                    ? "text-orange"
-                                                    : "text-white/80 group-hover:text-white"
+                                                ? "text-orange"
+                                                : "text-white/80 group-hover:text-white"
                                                 }`}
                                         >
                                             {service.title}
@@ -330,8 +330,8 @@ export default function ServicesInteractive() {
 
                                         <span
                                             className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg transition-all duration-300 ${isActive
-                                                    ? "bg-orange text-[#061c2a]"
-                                                    : "bg-white/5 text-orange group-hover:bg-orange/10"
+                                                ? "bg-orange text-[#061c2a]"
+                                                : "bg-white/5 text-orange group-hover:bg-orange/10"
                                                 }`}
                                         >
                                             <Icon className="h-4 w-4" />
