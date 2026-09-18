@@ -51,7 +51,7 @@ export const services: Service[] = [
 
   {
     id: 3,
-    title: "بريك السيارات",
+    title: "باركينج السيارات",
     icon: Truck,
     image: image3,
     description:
